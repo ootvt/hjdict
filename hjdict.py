@@ -22,8 +22,8 @@ def hjdict_japan(word):
         attrs={'class': 'word-audio'}).get('data-src')
     result['simple'] = soup.find(
         attrs={'class': 'simple'}).text
-    result['detail'] = soup.find(
-        attrs={'class': 'detail-groups'}).get_text('<br>', 'br/')
+    result['detail'] = str(soup.find(
+        attrs={'class': 'detail-groups'}).contents[1])
     result.update()#对result 字典更新
     return result
 
@@ -53,6 +53,3 @@ class hjdict(WebService):#接口名称
     @export('详细解释')  # 功能名称
     def detail_(self):  # 功能函数
         return self._get_field(u'detail')
-
-
-
